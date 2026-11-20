@@ -10,13 +10,12 @@ import serverGame
 
 selector = selectors.DefaultSelector()
 
-hostname = "localhost"
 port = None
 
 def createServerSocket() -> None:
     serverSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     try:
-        ip = socket.gethostbyname(hostname)
+        ip = socket.gethostbyname("0.0.0.0")
         serverSocket.bind((ip, port))
         serverSocket.listen()
         serverSocket.setblocking(False)
@@ -87,15 +86,12 @@ def loop() -> None:
         selector.close()
 
 def main():
-    global hostname, port
+    global port
     argLength = len(sys.argv)
     for i in range(0, argLength):
         arg = sys.argv[i]
         if arg.startswith("-"):
-            if arg == "-i":
-                if i < argLength - 1:
-                    hostname = sys.argv[i + 1]
-            elif arg == "-p":
+            if arg == "-p":
                 if i < argLength - 1:
                     try:
                         port = int(sys.argv[i + 1])
@@ -108,7 +104,7 @@ def main():
         else:
             continue
 
-    if hostname and port:
+    if port:
         print("Starting server")
         createServerSocket()
         print(f"Started server on port {port}")

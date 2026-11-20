@@ -80,7 +80,7 @@ def main():
                         print("Port must be an integer.")
                         sys.exit(-1)
             elif arg == "-h":
-                print(f"Usage: python3 server.py -i <hostname> -p <port>")
+                print(f"Usage: python3 client.py -i <hostname> -p <port>")
                 return
         else:
             continue
@@ -90,7 +90,7 @@ def main():
             loop()
         else: print("Erroring connecting to server")
     else:
-        print(f"Usage: python3 server.py -i <hostname> -p <port>")
+        print(f"Usage: python3 client.py -i <hostname> -p <port>")
 
 if __name__ == "__main__":
     main()
